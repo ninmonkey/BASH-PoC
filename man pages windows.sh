@@ -13,5 +13,12 @@
 display_manual() {
     "$1" --help | less;
 }
+display_manual_web() {
+    echo 'nyi'
+}
+
+
+
 alias man="display_manual"
+alias manw="display_manual_web"
 echo 'done';
