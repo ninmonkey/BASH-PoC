@@ -12,39 +12,10 @@ echo 'start parse'
 #     --web       : will open man page on the internet for better quality
 #
 
-# now easier: test with the following in the file.
-    # fn={..} , then:
-    # alias man="display_manual"
-    # man awk
-
-    # to execute test, run:
-    # $ source ~/.bashrc
-
-
-#   $ man cat
-    # prints cat --help | less
-
-    # $ source ./man\ pages\ windows.sh cat
-    # just says "done"
-
-    # $ source ./man\ pages\ windows.sh cat ; man cat
-    # works then prints "done"
-
-# fails:
-#   $ source ./man\ pages\ windows.sh cat
-#   done
-
-
-main() {
-    echo 'refactor to only use main, nothing naked'
-    echo 'refactor to only use main, nothing naked'
-    echo 'refactor to only use main, nothing naked'
-}
-
 display_manual() {
-    echo $1;
-    echo $2;
-    echo $3;
+    echo man 1= $1;
+    echo man 2= $2;
+    echo man 3= $3;
     # echo 'hi'
     # echo "1 = $1";
     # echo '2 = $2';
@@ -55,26 +26,6 @@ display_manual() {
     echo 'f'
     echo 'f'
 }
-display_manual_web() {
-    echo 'nyi'
-    use $BROWSER
-}
-
-main() {
-    # $1 = 'less'
-    # display_manual $1
-    # display_manual_web
-    echo $1
-    echo $2
-    echo "first $1 "
-    alias man="display_manual"
-    # alias manw="display_manual_web"
-    echo 'done';
-
-    # display_manual 'zip'
-
-}
-
 
 error_warn() {
     echo "Warning!: ${1}"
@@ -85,43 +36,29 @@ error_fatal() {
 }
 
 launch_browser() {
+    echo "using: ${BROWSER}"
+    echo "url 1 == ${1}"
+
     local url="$1"
     local request="\"${BROWSER}\" \"${url}\""
 
-
-    echo req = "$request"
+    echo 'test 1 v 2'
+    echo "r1 = ${request}"
+    request="\"${BROWSER}\" \"${url}\""
+    echo "r2 = +${request}+"
 
     if [[ "$url" ]]; then
-        "$request"
+        $request
     else
         error_warn "\$url is not set"
-        # error_warn "env \$BROWSER is not set!"
     fi
 }
 display_manpage() {
-    # declare command="$1"
-
-    # todo: if for web or not.
-    # declare man_command = $1
-    # declare use_web = $2
-
-    # echo '....'
-    # echo $1;
-    # echo '....'
-    # echo $2;
-    # echo '....'
-    # echo $3;
-    # echo '....'
-    # echo 1 = $1
-    # echo 2 = $2
     local cmd_name=$1
     local use_web=$2
 
-
-    # firefox_path = 'C:\Program Files\Mozilla Firefox\firefox.exe'
     local search_url='https://www.google.com?q='
     local search_query="linux+man+${cmd_name}"
-    # query = 'linux+man+awk'
 
     # or: firefox specific:     /usr/bin/firefox --search "term"
     # or: default associated browser
@@ -129,12 +66,14 @@ display_manpage() {
     # full_command = "$firefox_path $search_url$query"
     # or ? full_command = "${firefox_path} ${search_url}${query}"
 
+    local url="blank"
+    url="${search_url}${search_query}"
+    # local url "${search_url}${search_query}"
+    # url "${search_url}${search_query}"
+    # echo "url === ${url}"
+
     if [[ "$BROWSER" ]]; then
-        # echo "www ${BROWSER}"
-        # "${BROWSER}" + "${url}"
-        # echo $url
-        echo '.'
-        # local url "${search_url}${search_query}"
+        echo ". -> yes browser ${BROWSER}"
     else
         error_warn "Missing env \$BROWSER"
     fi
@@ -142,69 +81,22 @@ display_manpage() {
 
     if [[ "$use_web" ]]; then
         # echo "www ${BROWSER}"
-        echo '_'
+        echo "_ -> yes use web ${use_web}"
 
-        local url="${search_url}${search_query}"
-        launch_browser "$url"
+        launch_browser $url
 
         # echo "url = ${url}"
     else
         $cmd_name --help | less
     fi
-
-    # return
-    # local use_web = "$2"
-
-
-    # if [[ '--wb' = $2 ]]; then
-    #     echo 'yes --web'
-    # else
-    #     echo 'failed --web'
-    # fi
-
-    # if [[ 'web' = $2 ]]; then
-    #     echo 'yes web'
-    # else
-    #     echo 'failed web'
-    # fi
-
-    # if [[  ]]; then
-    #     echo 'web noiw!'
-    # else
-    #     "$1" --help | less;
-    # fi
-
 }
 
-display_manpage_web() {
-    echo 'disp web'
+main() {
+    alias man="display_manpage"
+    echo 'main() done';
+
+    echo 'quite confused because if I paste to the term, it runes right'
+    echo 'so some kind of quote issue'
+    echo "C:\Program Files\Mozilla Firefox\firefox.exe" "https://www.google.com?q=linux+man+awk"
 }
-
-# launch_firefox = 'C:\Program Files\Mozilla Firefox\firefox.exe" "https://www.google.com/search?q=linux+man+awk"'
-
-# $1 = 'less'
-# display_manpage $1
-# display_manpage_web
-# echo $1
-# echo $2
-# echo "first $1 "
-
-
-# alias manw="display_manpage_web"
-
-# test with the following in the file.
-alias man="display_manpage"
-
-# man awk
-# echo 1 = $use_web
-
-# man awk sdf
-# echo 2 = $use_web
-
-man awk --web
-# echo 3 = $use_web
-
-echo 'done parsing'
-
-
-# main
+main
