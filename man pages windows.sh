@@ -9,3 +9,9 @@
 #
 #
 # 1. print echo; echo arg
+
+display_manual() {
+    "$1" --help | less;
+}
+alias man="display_manual"
+echo 'done';
