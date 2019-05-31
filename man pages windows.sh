@@ -45,7 +45,7 @@ launch_browser() {
     echo 'test 1 v 2'
     echo "r1 = ${request}"
     request="\"${BROWSER}\" \"${url}\""
-    echo "r2 = +${request}+"
+    echo "r2 = ${request}"
 
     if [[ "$url" ]]; then
         $request
@@ -83,7 +83,7 @@ display_manpage() {
         # echo "www ${BROWSER}"
         echo "_ -> yes use web ${use_web}"
 
-        launch_browser $url
+        launch_browser "$url"
 
         # echo "url = ${url}"
     else
@@ -95,7 +95,17 @@ main() {
     alias man="display_manpage"
     echo 'main() done';
 
+    echo; echo; echo; echo;
+    echo ' need escaep space url ***IISS*** the missing file ?????'
+    echo ' need escaep space url ***IISS*** the missing file ?????'
+    echo ' need escaep space url ***IISS*** the missing file ?????'
     echo 'quite confused because if I paste to the term, it runes right'
+    echo 'is paste changing quotes then?'
+    echo 'what ***IISS*** the missing file ?????'
+    echo ' need escaep space url ***IISS*** the missing file ?????'
+    echo ' need escaep space url ***IISS*** the missing file ?????'
+
+    echo; echo; echo; echo;
     echo 'so some kind of quote issue'
     echo "C:\Program Files\Mozilla Firefox\firefox.exe" "https://www.google.com?q=linux+man+awk"
 }
