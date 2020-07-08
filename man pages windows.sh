@@ -16,8 +16,7 @@ display_manual() {
     echo man 1= $1;
     echo man 2= $2;
     echo man 3= $3;
-    # echo 'hi'
-    # echo "1 = $1";
+        # echo "1 = $1";
     # echo '2 = $2';
     # "$1" --help | less;
     # "$1 --help"
